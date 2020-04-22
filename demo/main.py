@@ -26,7 +26,6 @@ def send_discount_letters():
         else:
             age = today.year - birth_date.year
         customers.loc[i, "pensioner"] = age >= 62
-    print(customers)
 
     # Now we can calculate the discount for each customer
     for i in range(len(customers)):
@@ -41,38 +40,42 @@ def send_discount_letters():
             customers.loc[i, "discount"] = 0
     print(customers)
 
-    # Now we send them all emails
+    # Now we send them all messages
     sender = "info@the_store_company.com"
-    sender = "paul.nel@pm.me"
     message = ""
     receivers = ""
+
     for i in range(len(customers)):
         if customers.loc[i, "discount"] > 0:
             subject = ""
             body = ""
             if customers.loc[i, "pensioner"]:
                 subject = "Pensioner discount available next month!"
-                body = f"Dear {customers.loc[i, 'customer_name']}, since you are a pensioner next month, you will be eligible" \
-                       f" for a discount of {customers.loc[i, 'discount']*100}%"
+                body = f"Dear {customers.loc[i, 'customer_name']}, since you are a pensioner next month, " \
+                       f"you will be eligible" \
+                       f" for a discount of {customers.loc[i, 'discount'] * 100}%"
             if customers.loc[i, "birth_day"]:
                 subject = "Enjoy your birthday discount next month!"
-                body = f"Dear {customers.loc[i, 'customer_name']}, since it is your birthday next month, you will be eligible" \
-                       f" for a discount of {customers.loc[i, 'discount']*100}%"
-            receivers = f'{customers.loc[i, "customer_email"]}'
-            message = f"""From: From StoreCompany <{sender}m>
-            To: To Person <{receivers}>
-            Subject: {subject}
-            
-            {body}.
-            """
-            print(message)
+                body = f"Dear {customers.loc[i, 'customer_name']}, since it is your birthday next month, " \
+                       f"you will be eligible" \
+                       f" for a discount of {customers.loc[i, 'discount'] * 100}%"
 
-            try:
-                smtpObj = smtplib.SMTP('mail.thetechblobn.com', 465)
-                smtpObj.sendmail(sender, receivers, message)
-                print("Successfully sent email")
-            except :
-                print("Error: unable to send email")
+            if customers.loc[i, "contact_preference"] == "email":
+                # implement email protocols
+                message = f"""From: From StoreCompany <{sender}>
+                To: To Person <{customers.loc[i, "customer_email"]}>
+                Subject: {subject}
+
+                {body}.
+                """
+                print(f"The following message was successfully emailed from {sender} to "
+                      f"{customers.loc[i, 'customer_email']}:\n\n{message}\n\n")
+
+            if customers.loc[i, "contact_preference"] == "text":
+                # implement email protocols
+                message = f'{body}'
+                print(f"The following message was successfully send via text from {sender} to "
+                      f"{customers.loc[i, 'customer_phone']}:\n\n{message}\n\n")
 
 
 if __name__ == "__main__":

@@ -7,12 +7,10 @@ class Customer:
         self.birth_date = birth_date
         self.name = name
 
-    def is_birthday(self):
-        today = date.today()
-        born = self.birth_date
-        return today.month == born.month and today.day == born.day
+    def is_birthday_in(self, month):
+        return month == self.birth_date
 
-    def is_pensioner(self):
+    def is_pensioner_in(self, month):
         today = date.today()
         born = self.birth_date
         return self.get_age(born, today) >= 62
