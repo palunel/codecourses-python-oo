@@ -1,7 +1,0 @@
-﻿customer_id,customer_name,customer_surname,customer_date_of_birth,customer_city,customer_email,customer_phone,contact_preference
-1,Joey,Tribbiani,24678,Washington,joey@old_friends.com,555-555-5556,email
-2,Monica,Geller,23512,Seatle,monica@old_friends.com,555-555-5557,email
-3,Pheobe,Buffay,23222,Chicago,pheobe@old_friends.com,555-555-5558,email
-4,Rachel,Green,25245,Boston,rachel@old_friends.com,555-555-5559,email
-5,Ross,Geller,24352,New York,ross@old_friends.com,555-555-5560,email
-6,Chandler,Bing,18098,Austin,chandler@old_friends.com,555-555-5561,text
