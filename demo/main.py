@@ -1,9 +1,10 @@
 from datetime import datetime
 import pandas as pd
 import smtplib
+from os import environ
 
 
-def send_discount_letters():
+def send_discount_message():
     # We want to send an email to all customers in our database informing them of the discounts the are eligible
     # for in hte upcoming month
 
@@ -62,12 +63,16 @@ def send_discount_letters():
 
             if customers.loc[i, "contact_preference"] == "email":
                 # implement email protocols
-                message = f"""From: From StoreCompany <{sender}>
-                To: To Person <{customers.loc[i, "customer_email"]}>
-                Subject: {subject}
+                message = f"""Subject: {subject}
 
                 {body}.
                 """
+
+                server = smtplib.SMTP("smtp.gmail.com", 587)
+                server.starttls()
+                server.login(environ.get("email"), environ.get("pwd"))
+                server.sendmail(sender, "paul.nel@pm.me", message,)
+
                 print(f"The following message was successfully emailed from {sender} to "
                       f"{customers.loc[i, 'customer_email']}:\n\n{message}\n\n")
 
@@ -79,4 +84,4 @@ def send_discount_letters():
 
 
 if __name__ == "__main__":
-    send_discount_letters()
+    send_discount_message()

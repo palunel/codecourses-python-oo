@@ -3,6 +3,7 @@ class DiscountPolicy:
     def __init__(self):
         self.pensioner_discount = 0.15
         self.birthday_discount = 0.1
+        self.pensionable_age = 62
 
     @property
     def pensioner_discount(self):
@@ -20,3 +21,10 @@ class DiscountPolicy:
     def birthday_discount(self, discount):
         self._birthday_discount = discount
 
+    @property
+    def pensionable_age(self):
+        return self._pensionable_age
+
+    @pensionable_age.setter
+    def pensionable_age(self, age):
+        self._pensionable_age = age
