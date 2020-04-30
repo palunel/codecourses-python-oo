@@ -1,9 +1,3 @@
-from car import Car
-from boat import Boat
-
-import random
-
-
 class Game:
 
     def __init__(self):
